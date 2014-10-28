@@ -1,0 +1,38 @@
+﻿@model NimbusPOC.Web.Controllers.IndexViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Nimbus</h1>
+    <p class="lead">I still need to add signal R to refresh the Thems</p>
+    <p><span class="text-muted">Beware the Grue!</span></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4" id="FoundWho">
+        
+    </div>
+    <div class="col-md-8" id="FoundThem">
+
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(function() {
+            $.ajax({ url: "/Home/FoundWho" })
+            .success(function(html) {
+                $("#FoundWho").html(html);
+            });
+            setInterval(function() {
+                $.ajax({ url: "/Home/FoundThem" })
+                    .success(function(html) {
+                        $("#FoundThem").html(html);
+                    });
+            }, 100);
+        });
+    </script>
+}

@@ -1,0 +1,10 @@
+﻿@model NimbusPOC.Web.Controllers.FoundThemViewModel
+
+<h2>Found Them</h2>
+<p class="text-warning"> I am intervalling this - @DateTime.Now!</p>
+<ol>
+@foreach (var m in Model.Thems)
+{
+    <li><span>@m</span></li>
+}
+</ol>
