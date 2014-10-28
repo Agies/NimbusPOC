@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Nimbus;
-using Nimbus.Handlers;
-using Nimbus.MessageContracts;
 using NimbusPOC.Web.DependencyResolution;
+using NimbusPOC.Web.Messaging;
+using NimbusPOC.Web.ViewModels;
 
 namespace NimbusPOC.Web.Controllers
 {
@@ -68,39 +67,5 @@ namespace NimbusPOC.Web.Controllers
 
             return View();
         }
-    }
-
-    public class FoundThemViewModel
-    {
-        public IEnumerable<string> Thems { get; set; }
-    }
-
-    public class FoundHandler : IHandleCommand<FoundCommand>
-    {
-        private readonly ThemsModel _model;
-
-        public FoundHandler(ThemsModel model)
-        {
-            _model = model;
-        }
-
-        public Task Handle(FoundCommand busCommand)
-        {
-            return Task.Factory.StartNew(() => _model.Add(busCommand.Who));
-        }
-    }
-
-    public class FoundCommand : IBusCommand
-    {
-        public string Who { get; set; }
-    }
-
-    public class FoundWhoViewModel
-    {
-        public string Who { get; set; }
-    }
-
-    public class IndexViewModel
-    {
     }
 }
