@@ -1,0 +1,80 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+}
+<div class="contest">
+    <div class="well well-sm">
+        <h1>Find The QSI Member</h1>
+        <p class="lead">
+            Gotta Find'em All
+        </p>
+    </div>
+    <div class="people">
+        <div class="person">
+            <div class="info">
+                <span class="amount"></span>
+                <div class="line"></div>
+            </div>
+            <img id="wolfgang" src="http://img3.wikia.nocookie.net/__cb20140330211944/dont-starve-game/images/thumb/a/af/Wolfgang.png/300px-Wolfgang.png" />
+        </div>
+        <div class="person">
+            <div class="info">
+                <span class="amount"></span>
+                <div class="line"></div>
+            </div>
+            <img id="wendy" src="http://img4.wikia.nocookie.net/__cb20140330212641/dont-starve-game/images/thumb/2/2d/Wendy.png/300px-Wendy.png" />
+        </div>
+        <div class="person">
+            <div class="info">
+                <span class="amount"></span>
+                <div class="line"></div>
+            </div>
+            <img id="webber" src="http://img1.wikia.nocookie.net/__cb20140402184719/dont-starve-game/images/thumb/c/cc/Webber.png/300px-Webber.png" />
+        </div>
+        <div class="person">
+            <div class="info">
+                <span class="amount"></span>
+                <div class="line"></div>
+            </div>
+            <img id="wilson" src="http://img2.wikia.nocookie.net/__cb20140330212319/dont-starve-game/images/thumb/7/78/Wilson.png/300px-Wilson.png" />
+        </div>
+    </div>
+    <div class="well well-sm">
+        <h2>Non-QSI Leaders</h2>
+    </div>
+    <div>
+        Some Rotatory List Here
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(function () {
+            var peeps = $(".person"),
+                peepsVM = [],
+                p;
+            for (var i = 0; i < peeps.length; i++) {
+                p = peeps[i];
+                peepsVM.push({
+                    margin: 0,
+                    element: p
+                });
+            }
+            setInterval(function () {
+                var result = Math.floor((Math.random() * 4));
+                var peep = peepsVM[result];
+                peep.margin += Math.floor((Math.random() * 20) + 10);
+                $(peep.element).find("img").removeClass().addClass('wobble animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                    $(this).removeClass();
+                });
+                $(peep.element).find("img")[0].style["margin-left"] = (peep.margin).toString() + "px";
+                $(peep.element).find(".line")[0].style["width"] = (peep.margin).toString() + "px";
+                var span = $(peep.element).find(".amount");
+                span.text(peep.margin);
+                span[0].style["margin-left"] = (peep.margin/2).toString() + "px";
+            }, 1000);
+        });
+    </script>
+}
